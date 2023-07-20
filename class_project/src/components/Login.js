@@ -52,8 +52,6 @@ function Login (){
             type="number"
             name="password"
             className="input"
-            min={100000}
-            max={999999}
             placeholder="6-digit Account Number"
             onChange={HandleInput 
             }

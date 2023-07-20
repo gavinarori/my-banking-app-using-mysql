@@ -9,20 +9,18 @@ app.use(express.json());
 const db = mysql.createConnection({
     host:"localhost",
     user:"root",
-    password:"1234",
-    database:"Login"
+    password:"",
+    database:"bank"
 })
 
 app.post('/createUser',(req,res) =>
 {
-    const sql = "INSERT INTO createUser (`name`,`password`,`idNumber`,`deposit`,`branchCode`,`Number`,) VALUES(?)";
+    const sql = "INSERT INTO  signUp (`name`,`password`,`idNumber`,`deposit`) VALUES (?)";
     const values = [
         req.body.name,
         req.body.password,
         req.body.idNumber,
         req.body.deposit,
-        req.body.branchCode,
-        req.body.Number
     ]
     db.query(sql,[values],(err,data) =>{
         if(err){
@@ -34,7 +32,7 @@ app.post('/createUser',(req,res) =>
 
 app.post('/Login',(req,res) =>
 {
-    const sql = "SELECT * FROM login WHERE `name` = ? AND `password` = ?"; 
+    const sql = "SELECT * FROM signUp WHERE `name` = ? AND `password` = ?"; 
     db.query(sql,[req.body.name,req.body.password,],(err,data) =>{
         if(err){
             return res.json("Error");
@@ -48,12 +46,30 @@ app.post('/Login',(req,res) =>
 })
 
 
+
+app.get('/users', (req, res) => {
+  const query = 'SELECT * FROM transfer';
+  connection.query(query, (err, results) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+    res.json(results);
+  });
+});
+
+
+
+
+
+
 // Transfer money route
 app.post('/transfer', (req, res) => {
     const { senderId, receiverId, amount } = req.body;
   
     // Check if sender has sufficient balance
-    pool.query('SELECT balance FROM users WHERE id = ?', [senderId], (error, results) => {
+    db.query('SELECT balance FROM users WHERE id = ?', [senderId], (error, results) => {
       if (error) {
         console.error('Error retrieving sender balance:', error);
         return res.status(500).json({ error: 'An error occurred' });
@@ -65,7 +81,7 @@ app.post('/transfer', (req, res) => {
       }
   
       // Start a MySQL transaction
-      pool.getConnection((error, connection) => {
+      db.getConnection((error, connection) => {
         if (error) {
           console.error('Error establishing database connection:', error);
           return res.status(500).json({ error: 'An error occurred' });

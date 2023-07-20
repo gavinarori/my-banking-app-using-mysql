@@ -18,39 +18,20 @@ function Home() {
         </div>
       </div>
       <div className="services__banner">
-        <h1>Our Services</h1>
+        <h1>check balances</h1>
         <a className="button" href="#services">
           <ion-icon name="chevron-down-circle"></ion-icon>
         </a>
       </div>
       <div className="services" id="services">
-        <Link to="/create-user">
-          <div className="item">
-            <div className="image">
-              <i className="fas fa-users"></i>
-            </div>
-            <div className="title">
-              <h3>Create User</h3>
-            </div>
-          </div>
-        </Link>
-        <Link to="/transfer">
+
+        <Link to="/transactions-history">
           <div className="item">
             <div className="image">
               <i className="fas fa-rupee-sign"></i>
             </div>
             <div className="title">
-              <h3>Make Transaction</h3>
-            </div>
-          </div>
-        </Link>
-        <Link to="/transactions-history">
-          <div className="item">
-            <div className="image">
-              <i className="fas fa-history"></i>
-            </div>
-            <div className="title">
-              <h3>Transaction History</h3>
+              <h3>Balance</h3>
             </div>
           </div>
         </Link>

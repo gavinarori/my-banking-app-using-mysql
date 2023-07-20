@@ -22,10 +22,10 @@ function Transfer() {
   const submitHandler = (event) => {
     event.preventDefault();
     axios
-      .post("http://localhost:3000/transfer", values)
+      .post("http://localhost:8081/transfer", values)
       .then((res) => {
         console.log(res.data);
-        navigate('/transaction');
+        navigate('/transactions-history');
         // Handle success, e.g., show a success message or navigate to another page
       })
       .catch((error) => {
@@ -48,7 +48,7 @@ function Transfer() {
             max={999999}
             name="from"
             className="input"
-            placeholder="Account Number"
+            placeholder="senderId"
             onChange={handleInput}
           />
         </div>
@@ -62,7 +62,7 @@ function Transfer() {
             max={999999}
             name="to"
             className="input"
-            placeholder="Account Number"
+            placeholder="receiverId"
             onChange={handleInput}
           />
         </div>

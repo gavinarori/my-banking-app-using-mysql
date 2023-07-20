@@ -6,19 +6,15 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 function Transactions() {
-  const [transactions, setTransactions] = useState([]);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    // Fetch transactions from the server
-    axios
-      .get("http://localhost:3000//transactions-history")
-      .then((res) => {
-        setTransactions(res.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    fetch("http://localhost:8081/users")
+      .then((response) => response.json())
+      .then((data) => setUsers(data))
+      .catch((error) => console.error("Error:", error));
   }, []);
+
 
   return (
     <div className="transactions" css={CSS}>
@@ -27,21 +23,32 @@ function Transactions() {
         <table>
           <thead>
             <tr key={"id-1"}>
-              <td>UID</td>
-              <td>Payer</td>
-              <td>Receiver</td>
+              <td>senderId</td>
+              <td>ReceiverId</td>
               <td>Amount</td>
+              
             </tr>
           </thead>
           <tbody>
-            {transactions.map((transaction, index) => (
-              <tr key={`transaction-${index}`} className={index % 2 === 0 ? "" : "light"}>
-                <td>{transaction.id}</td>
-                <td>{transaction.senderId}</td>
-                <td>{transaction.receiverId}</td>
-                <td>{transaction.amount}</td>
+            
+              <tr >
+                <td>100000</td>
+                <td>100001</td>
+                <td>200000</td>
+               
               </tr>
-            ))}
+              <tr >
+                <td>100002</td>
+                <td>100004</td>
+                <td>300000</td>
+               
+              </tr>
+              <tr >
+                <td>100003</td>
+                <td>100005</td>
+                <td>300000</td>
+               
+              </tr>
           </tbody>
         </table>
       </div>

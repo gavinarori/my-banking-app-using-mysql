@@ -1,31 +1,19 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 
-import { css, jsx } from "@emotion/react";
 import { useState, useEffect } from "react";
-//import { db } from "./firebase";
+import { css } from "@emotion/react";
 import { Link } from "react-router-dom";
 
 function AllOurCustomers() {
- // const [state, setState] = useState([]);
+  const [users, setUsers] = useState([]);
 
-
-{/*
-useEffect(() => {
-    fetchData();
+  useEffect(() => {
+    fetch("http://localhost:5000/api/users")
+      .then((response) => response.json())
+      .then((data) => setUsers(data))
+      .catch((error) => console.error("Error:", error));
   }, []);
-
-
-const fetchData = () => {
-      db
-        .collection("users")
-        .orderBy("name")
-        .onSnapshot((snapshot) =>
-          setState(
-            snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
-          )
-        )
-  }; */}  
 
   return (
     <div className="allOurCustomers" css={CSS}>
@@ -33,26 +21,28 @@ const fetchData = () => {
       <div className="table">
         <table>
           <thead>
-            <tr key={"id-1"}>
+            <tr>
               <td>UID</td>
               <td>Name</td>
               <td>Account Number</td>
               <td>Current Balance</td>
-              <td><ion-icon name="cash-outline"></ion-icon></td>
+              <td>
+                <ion-icon name="cash-outline"></ion-icon>
+              </td>
             </tr>
           </thead>
           <tbody>
-           {/*
-           {state.map((obj, i) => (
-              <tr key={`id${i}`} className={i%2===0 ? "" : "light"}>
-                <td>{i+1}</td>
-                <td>{obj.data.name}</td>
-                <td>{obj.data.accountNo}</td>
-                <td>{obj.data.balance}</td>
-                <td><Link to="/transfer">Transfer Money</Link></td>
+            {users.map((user) => (
+              <tr key={user.id} className="light">
+                <td>{user.id}</td>
+                <td>{user.name}</td>
+                <td>{user.account_number}</td>
+                <td>{user.balance}</td>
+                <td>
+                  <Link to="/transfer">Transfer Money</Link>
+                </td>
               </tr>
             ))}
-           */} 
           </tbody>
         </table>
       </div>

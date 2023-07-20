@@ -79,10 +79,6 @@ function Navbar() {
             <span className="seperator"> |</span>
           </li>
           <li>
-            <Link to="//transfer">All Our Customers</Link>
-            <span className="seperator"> |</span>
-          </li>
-          <li>
             <Link to="/transactions-history">Transaction History</Link>
           </li>
         </ul>

@@ -52,54 +52,24 @@ function CreateUser() {
             className="input"
             min={100000}
             max={999999}
-            placeholder="6-digit Account Number"
+            placeholder="6-digit id Number"
             onChange={HandleInput
             }
           />
         </div>
         <div className="form__item">
           <label htmlFor="balance" className="label">
-            Mobile Number:
+          amount:
           </label>
           <input
             type="number"
             name="number"
             className="input"
-            min={0}
-            placeholder="Mobile Number"
+            placeholder="amount"
             onChange={HandleInput
             }
           />
-        </div>
-        <div className="form__item">
-          <label htmlFor="balance" className="label">
-            Deposit:
-          </label>
-          <input
-            type="number"
-            name="number"
-            className="input"
-            min={0}
-            placeholder="Deposit"
-            onChange={HandleInput
-            }
-          />
-          <div className="form__item">
-  <label htmlFor="balance" className="label">
-    branch code:
-  </label>
-  <select
-    name="number"
-    className="input"
-    onChange={HandleInput}
-  >
-    <option value="0">9</option>
-    <option value="10">10</option>
-    <option value="20">20</option>
-    <option value="30">30</option>
-    {/* Add more options as needed */}
-  </select>
-</div>
+      {/**   */}    
         </div>
         <div className="form__item">
           <label htmlFor="password" className="label">
